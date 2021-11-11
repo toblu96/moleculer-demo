@@ -66,7 +66,6 @@ module.exports = {
 		 *  - remove
 		 */
 
-		// --- ADDITIONAL ACTIONS ---
 
 		/**
 		 * Increase the quantity of the product item.

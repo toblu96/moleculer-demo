@@ -24,6 +24,14 @@ module.exports = {
 		use: [],
 
 		routes: [
+			// moleculer-auto-openapi routes
+			{
+				path: '/api/openapi',
+				aliases: {
+					'GET /openapi.json': 'openapi.generateDocs', // swagger scheme
+					'GET /ui': 'openapi.ui', // ui
+				},
+			},
 			{
 				path: "/api",
 

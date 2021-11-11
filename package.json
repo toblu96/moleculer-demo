@@ -23,10 +23,11 @@
     "moleculer-repl": "^0.6.6"
   },
   "dependencies": {
-    "moleculer-web": "^0.10.2",
+    "moleculer": "^0.14.16",
+    "moleculer-auto-openapi": "^1.0.8",
     "moleculer-db": "^0.8.15",
     "moleculer-db-adapter-mongo": "^0.4.13",
-    "moleculer": "^0.14.16"
+    "moleculer-web": "^0.10.2"
   },
   "engines": {
     "node": ">= 12.x.x"

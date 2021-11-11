@@ -53,6 +53,16 @@ module.exports = {
 			async handler(ctx) {
 				return `Welcome, ${ctx.params.name}`;
 			}
+		},
+
+		node: {
+			rest: {
+				method: "GET",
+				path: "/node"
+			},
+			async handler(ctx) {
+				return `${ctx.nodeID}`;
+			}
 		}
 	},
 

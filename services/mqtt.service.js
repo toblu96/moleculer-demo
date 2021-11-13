@@ -97,7 +97,7 @@ module.exports = {
 				let subscriptions = await this.broker.call('mqtt.list')
 				for (let subsc of subscriptions.rows) {
 
-					this.client.subscribe(`${subsc.topic}`, (err) => {
+					this.client.subscribe(`$share/mqttGroup/${subsc.topic}`, (err) => {
 						if (err) {
 							this.logger.warn(`Could not subscribe to topic ${subsc.topic}`)
 							this.logger.warn(err)

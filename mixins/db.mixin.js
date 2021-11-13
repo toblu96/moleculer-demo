@@ -1,13 +1,13 @@
 "use strict";
 
 const fs = require("fs");
-const DbService	= require("moleculer-db");
+const DbService = require("moleculer-db");
 
 /**
  * @typedef {import('moleculer').Context} Context Moleculer's Context
  */
 
-module.exports = function(collection) {
+module.exports = function (collection) {
 	const cacheCleanEventName = `cache.clean.${collection}`;
 
 	const schema = {
@@ -36,7 +36,19 @@ module.exports = function(collection) {
 			 * @param {Context} ctx
 			 */
 			async entityChanged(type, json, ctx) {
-				ctx.broadcast(cacheCleanEventName);
+				await ctx.broadcast(cacheCleanEventName);
+
+				// call lifecycle events because these are overwritten by this method
+				const eventName = `entity${this.capitalize(type)}`;
+				if (this.schema[eventName] != null) {
+					return this.schema[eventName].call(this, json, ctx);
+				}
+				if (this.schema['entityChanged'] != null) {
+					this.schema['entityChanged'].call(this, type, json, ctx);
+				}
+			},
+			capitalize(string) {
+				return string.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
 			}
 		},
 

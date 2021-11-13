@@ -70,6 +70,11 @@ module.exports = {
 	 * Events
 	 */
 	events: {
+		"mqtt.message": {
+			handler(ctx) {
+				this.logger.info(`[${ctx.eventName}] Message from ${ctx.nodeID} with payload \n${ctx.params}`)
+			}
+		}
 
 	},
 

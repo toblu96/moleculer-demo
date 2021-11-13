@@ -60,7 +60,7 @@ module.exports = {
 	// In production you can set it via `TRANSPORTER=nats://localhost:4222` environment variable.
 	transporter: null, //"TCP"
 
-	// Define a cacher.
+	// Define a cacher. - null, "Memory", "MemoryLRU", "Redis"
 	// More info: https://moleculer.services/docs/0.14/caching.html
 	cacher: null,
 

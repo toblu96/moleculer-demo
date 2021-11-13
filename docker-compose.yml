@@ -1,14 +1,13 @@
 version: "3.3"
 
 services:
-
   api:
     build:
       context: .
     image: moleculer-demo
     env_file: docker-compose.env
     environment:
-      SERVICES: api
+      SERVICES: api, openapi
       PORT: 3000
     labels:
       - "traefik.enable=true"
@@ -34,6 +33,20 @@ services:
     env_file: docker-compose.env
     environment:
       SERVICES: products
+    depends_on:
+      - mongo
+    networks:
+      - internal
+
+  mqtt:
+    build:
+      context: .
+    image: moleculer-demo
+    deploy:
+      replicas: 4
+    env_file: docker-compose.env
+    environment:
+      SERVICES: mqtt
     depends_on:
       - mongo
     networks:

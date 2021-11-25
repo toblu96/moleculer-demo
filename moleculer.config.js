@@ -1,5 +1,7 @@
 "use strict";
 
+const InfluxLogger = require('./modules/logger/influx')
+
 /**
  * Moleculer ServiceBroker configuration file
  *
@@ -35,7 +37,7 @@ module.exports = {
 
 	// Enable/disable logging or use custom logger. More info: https://moleculer.services/docs/0.14/logging.html
 	// Available logger types: "Console", "File", "Pino", "Winston", "Bunyan", "debug", "Log4js", "Datadog"
-	logger: {
+	logger: [{
 		type: "Console",
 		options: {
 			// Using colors on the output
@@ -50,6 +52,14 @@ module.exports = {
 			autoPadding: false
 		}
 	},
+	new InfluxLogger({
+		level: {
+			"TRACER": false,
+			"**": "info"
+		}
+	})
+	],
+
 	// Default log level for built-in console logger. It can be overwritten in logger options above.
 	// Available values: trace, debug, info, warn, error, fatal
 	logLevel: "info",

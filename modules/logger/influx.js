@@ -79,12 +79,6 @@ class InfluxLogger extends BaseLogger {
 
 		if (!level) return null;
 
-		const printArgs = args => {
-			return args.map(p => {
-				if (this.isObject(p) || Array.isArray(p)) return this.objectPrinter(p);
-				return p;
-			});
-		};
 		const levelIdx = BaseLogger.LEVELS.indexOf(level);
 
 		return async (type, args) => {
@@ -94,7 +88,7 @@ class InfluxLogger extends BaseLogger {
 			this.queue.push({
 				ts: Date.now(),
 				level: type,
-				msg: printArgs(args).join(" "),
+				msg: args.join(" "),
 				bindings
 			});
 
@@ -135,11 +129,6 @@ class InfluxLogger extends BaseLogger {
 		}
 
 		return this.broker.Promise.resolve();
-	}
-
-	// Helper functions
-	isObject(o) {
-		return o !== null && typeof o === "object" && !(o instanceof String);
 	}
 
 }
